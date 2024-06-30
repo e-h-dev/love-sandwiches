@@ -57,7 +57,6 @@ def validate_data(values):
     return True
 
 
-
 def calculate_surplus_data(sales_row):
     """
     Compare sales with stock and calculate the surplus for each item type.
@@ -78,10 +77,27 @@ def calculate_surplus_data(sales_row):
 
 
 def update_worksheet(data, worksheet):
+    """
+    Update surplus worksheet, add new row with the list data provided.
+    """
     print(f"Updating {worksheet} worksheet....\n")
     worksheet_to_update = SHEET.worksheet(worksheet)
     worksheet_to_update.append_row(data)
     print(f"{worksheet} worksheet updated successfully\n")
+
+def get_last_five_sales():
+    """
+    Collects data from last five sales
+    """
+    sales = SHEET.worksheet("sales")
+    #column = sales.col_values(3)
+    #print(column)
+
+    columns = []
+    for ind in range(1,7):
+        column = sales.col_values(ind)
+        columns.append(column[-5:])
+    pprint(columns)
 
 
 
@@ -97,4 +113,5 @@ def main():
 
 
 print("Welome to love sandwiches data automation. \n")
-main()
+#main()
+get_last_five_sales()
